@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Nómina Quincenal - Colombia 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(76, 175, 80, 0.3);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1em;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        input:focus, select:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .results {
+            background: linear-gradient(135deg, #f8f9ff, #e8ecff);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border: 2px solid #e0e8ff;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e8ff;
+            font-size: 1.1em;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-label {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .result-value {
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .total-quincenal {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 8px 16px rgba(255, 107, 107, 0.3);
+        }
+        
+        .warning {
+            background: linear-gradient(135deg, #FFA726, #FF7043);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💰 Calculadora de Nómina Quincenal</h1>
+        
+        <div class="info-card">
+            <h3>📊 Salario Mínimo Colombia 2025 (Desde Julio)</h3>
+            <p><strong>Salario Base:</strong> $1,423,500</p>
+            <p><strong>Auxilio de Transporte:</strong> $200,000</p>
+            <p><strong>Jornada Laboral:</strong> 44 horas semanales (desde 15 de julio)</p>
+            <p><strong>Valor Hora Ordinaria:</strong> $7,471 (nueva jornada)</p>
+        </div>
+        
+        <div class="grid">
+            <div class="form-group">
+                <label for="salarioBase">💵 Salario Base Mensual:</label>
+                <input type="number" id="salarioBase" value="1423500" min="1423500">
+            </div>
+            
+            <div class="form-group">
+                <label for="auxilioTransporte">🚌 Auxilio de Transporte:</label>
+                <input type="number" id="auxilioTransporte" value="200000">
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="form-group">
+                <label for="horasExtra">⏰ Horas Extra Diurnas (quincena):</label>
+                <input type="number" id="horasExtra" value="24" min="0">
+                <small style="color: #666; font-size: 0.9em;">12 horas semanales × 2 semanas = 24 horas quincenales</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="dominicales">☀️ Dominicales/Festivos (quincena):</label>
+                <input type="number" id="dominicales" value="8" min="0">
+                <small style="color: #666; font-size: 0.9em;">1 domingo cada 15 días = 8 horas quincenales</small>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="form-group">
+                <label for="recargos">💼 Recargos/Bonificaciones:</label>
+                <input type="number" id="recargos" value="0" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="descuentos">📉 Descuentos Adicionales:</label>
+                <input type="number" id="descuentos" value="0" min="0">
+            </div>
+        </div>
+        
+        <button class="btn" onclick="calcularNomina()">🧮 Calcular Nómina Quincenal</button>
+        
+        <div id="resultados" class="results" style="display: none;">
+            <h3 style="margin-bottom: 20px; color: #333; text-align: center;">📋 Detalle de Cálculo Quincenal</h3>
+            
+            <div class="result-item">
+                <span class="result-label">Salario Base (15 días):</span>
+                <span class="result-value" id="salarioQuincenal">$0</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">Auxilio Transporte (15 días):</span>
+                <span class="result-value" id="auxilioQuincenal">$0</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">Horas Extra Diurnas (24h):</span>
+                <span class="result-value" id="horasExtraValor">$0</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">Dominicales/Festivos (8h):</span>
+                <span class="result-value" id="dominicalesValor">$0</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">Recargos/Bonificaciones:</span>
+                <span class="result-value" id="recargosValor">$0</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">Total Devengado:</span>
+                <span class="result-value" id="totalDevengado">$0</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">Salud (4%):</span>
+                <span class="result-value" id="saludDescuento">$0</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">Pensión (4%):</span>
+                <span class="result-value" id="pensionDescuento">$0</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">Descuentos Adicionales:</span>
+                <span class="result-value" id="descuentosAdicionales">$0</span>
+            </div>
+            
+            <div class="result-item">
+                <span class="result-label">Total Descuentos:</span>
+                <span class="result-value" id="totalDescuentos">$0</span>
+            </div>
+            
+            <div class="total-quincenal">
+                🎯 Total a Recibir Quincenal: <span id="totalFinal">$0</span>
+            </div>
+        </div>
+        
+        <div class="warning">
+            ⚠️ <strong>Nota:</strong> Cálculo actualizado con la nueva jornada laboral de 44 horas semanales vigente desde el 15 de julio de 2025. Los descuentos pueden variar según libranzas, embargos, anticipos u otros conceptos específicos de tu empresa.
+        </div>
+    </div>
+
+    <script>
+        function formatearPesos(valor) {
+            return new Intl.NumberFormat('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0
+            }).format(valor);
+        }
+
+        function calcularNomina() {
+            // Obtener valores
+            const salarioBase = parseFloat(document.getElementById('salarioBase').value) || 0;
+            const auxilioTransporte = parseFloat(document.getElementById('auxilioTransporte').value) || 0;
+            const horasExtra = parseFloat(document.getElementById('horasExtra').value) || 0;
+            const dominicales = parseFloat(document.getElementById('dominicales').value) || 0;
+            const recargos = parseFloat(document.getElementById('recargos').value) || 0;
+            const descuentos = parseFloat(document.getElementById('descuentos').value) || 0;
+
+            // Calcular salario quincenal (15 días)
+            const salarioQuincenal = salarioBase / 2;
+            const auxilioQuincenal = auxilioTransporte / 2;
+
+            // Calcular valor hora ordinaria (NUEVA JORNADA 44 HORAS DESDE JULIO 2025)
+            // 44 horas semanales × 4.33 semanas = 190.52 horas mensuales
+            const valorHoraOrdinaria = salarioBase / 190.52;
+
+            // Calcular horas extra diurnas (25% adicional)
+            const valorHoraExtraDiurna = valorHoraOrdinaria * 1.25;
+            const valorHorasExtrasDiurnas = horasExtra * valorHoraExtraDiurna;
+
+            // Calcular dominicales/festivos (75% adicional)
+            const valorHoraDominical = valorHoraOrdinaria * 1.75;
+            const valorDominicales = dominicales * valorHoraDominical;
+
+            // Total devengado quincenal
+            const totalDevengado = salarioQuincenal + auxilioQuincenal + valorHorasExtrasDiurnas + valorDominicales + (recargos / 2);
+
+            // Calcular descuentos de seguridad social sobre salario base + horas extra (no sobre auxilio transporte)
+            const baseParaDescuentos = salarioQuincenal + valorHorasExtrasDiurnas + valorDominicales + (recargos / 2);
+            const saludDescuento = baseParaDescuentos * 0.04; // 4%
+            const pensionDescuento = baseParaDescuentos * 0.04; // 4%
+
+            const totalDescuentos = saludDescuento + pensionDescuento + (descuentos / 2);
+
+            // Total final a recibir
+            const totalFinal = totalDevengado - totalDescuentos;
+
+            // Mostrar resultados
+            document.getElementById('salarioQuincenal').textContent = formatearPesos(salarioQuincenal);
+            document.getElementById('auxilioQuincenal').textContent = formatearPesos(auxilioQuincenal);
+            document.getElementById('horasExtraValor').textContent = formatearPesos(valorHorasExtrasDiurnas);
+            document.getElementById('dominicalesValor').textContent = formatearPesos(valorDominicales);
+            document.getElementById('recargosValor').textContent = formatearPesos(recargos / 2);
+            document.getElementById('totalDevengado').textContent = formatearPesos(totalDevengado);
+            document.getElementById('saludDescuento').textContent = formatearPesos(saludDescuento);
+            document.getElementById('pensionDescuento').textContent = formatearPesos(pensionDescuento);
+            document.getElementById('descuentosAdicionales').textContent = formatearPesos(descuentos / 2);
+            document.getElementById('totalDescuentos').textContent = formatearPesos(totalDescuentos);
+            document.getElementById('totalFinal').textContent = formatearPesos(totalFinal);
+
+            document.getElementById('resultados').style.display = 'block';
+            document.getElementById('resultados').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Calcular automáticamente cuando se carga la página
+        window.onload = function() {
+            calcularNomina();
+        };
+    </script>
+</body>
+</html>
